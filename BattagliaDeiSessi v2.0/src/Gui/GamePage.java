@@ -144,7 +144,7 @@ public class GamePage {
         GamePage.strategiaSelezionata = strategiaSelezionata;
 
 
-        pathImmagineBackground = getClass().getResource("FotoInizialeBackgroundGame.jpg").toString();
+        pathImmagineBackground = getClass().getResource("world.jpg").toString();
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -215,8 +215,6 @@ public class GamePage {
                     if(originalImage.getRGB(x, y) != 0) {
                         pw.setArgb(x, y, colorWhiteAreaBomb);
                     }
-                    //pw.setArgb(x, y, originalImage.getRGB(x, y));
-                    //System.out.println(originalImage.getRGB(x, y));
                 }
             }
         }
@@ -266,7 +264,7 @@ public class GamePage {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
-            alert.setContentText("Sei sicuro di voler abbandonare la partita?");
+            alert.setContentText("Sei sicuro di voler terminare la simulazione?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 terminaPartita = true;
@@ -285,7 +283,7 @@ public class GamePage {
 
         SfondoBottone(startStop);
 
-        WritableImage cc = wr;
+        WritableImage finalwr = wr;
         startStop.setOnAction(e -> {
             if(startStop.getText().equals("inizia")) {
                 drawImageData(matriceBomba,
@@ -295,7 +293,7 @@ public class GamePage {
                         atomicBomb,
                         originalImage,
                         imView,
-                        cc,
+                        finalwr,
                         anniTrascorsi,
                         numeroMaschi,
                         numeroFemmine,
@@ -450,21 +448,21 @@ public class GamePage {
                     }
                     while (originalImage.getRGB(secondoPixelRandom, primoPixelRandom) == 0);
 
-                    drawPeoplePixel(originalImage, imView, wr, primoPixelRandom,secondoPixelRandom,persona);
+                    drawPeoplePixel(originalImage, imView, wr, primoPixelRandom, secondoPixelRandom, persona);
 
-                    mappaPersonaPixel.put(new ArrayList<>(Arrays.asList(secondoPixelRandom,primoPixelRandom)) , persona);
+                    mappaPersonaPixel.put(new ArrayList<>(Arrays.asList(secondoPixelRandom, primoPixelRandom)), persona);
                 }
 
 
                 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-                WritableImage cc = wr;
                 atomicBomb.setOnAction(e -> {
                     javafx.application.Platform.runLater(() -> {
                         eventoMovimento = true;
                         eventoClick = true;
 
+                        WritableImage mm = wr;
                         imView.setOnMouseMoved(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(javafx.scene.input.MouseEvent event) {
@@ -473,7 +471,7 @@ public class GamePage {
                                     for(int xMatrice = 0 ; xMatrice < originalImage.getWidth(); xMatrice++) {
                                         for(int yMatrice = 0 ; yMatrice < originalImage.getHeight(); yMatrice++) {
                                             if(matriceBomba[xMatrice][yMatrice] != -1) {
-                                                drawAtomicArea(originalImage, imView, cc, yMatrice, xMatrice, colorWhiteAreaBomb);
+                                                drawAtomicArea(originalImage, imView, mm, yMatrice, xMatrice, colorWhiteAreaBomb);
                                                 matriceBomba[xMatrice][yMatrice] =- 1;
                                             }
                                         }
@@ -485,9 +483,9 @@ public class GamePage {
                                     for(int xx = attualeX-20 ; xx < attualeX + 20; xx++) {
                                         for(int yy = attualeY-20 ; yy < attualeY + 20; yy++) {
 
-                                            drawAtomicArea(originalImage,imView, cc,yy,xx,colorRedAreaBomb);
+                                            drawAtomicArea(originalImage, imView, mm, yy, xx, colorRedAreaBomb);
 
-                                            matriceBomba[xx][yy] = originalImage.getRGB(xx,yy);
+                                            matriceBomba[xx][yy] = originalImage.getRGB(xx, yy);
                                         }
 
                                     }
@@ -506,7 +504,7 @@ public class GamePage {
                                 for(int xMatrice = 0 ; xMatrice < originalImage.getWidth(); xMatrice++) {
                                     for(int yMatrice = 0 ; yMatrice < originalImage.getHeight(); yMatrice++) {
                                         if(matriceBomba[xMatrice][yMatrice] != -1) {
-                                            bombaAtomicArea(originalImage, imView, cc, yMatrice, xMatrice, colorWhiteAreaBomb);
+                                            bombaAtomicArea(originalImage, imView, wr, yMatrice, xMatrice, colorWhiteAreaBomb);
                                             matriceBomba[xMatrice][yMatrice] =- 1;
 
                                             if(mappaPersonaPixel.get(Arrays.asList(xMatrice, yMatrice)) != null) {
@@ -736,24 +734,24 @@ public class GamePage {
     private synchronized void drawPeoplePixel(BufferedImage originalImage,ImageView imageView,WritableImage wr,
                            int primoPixelRandom, int secondoPixelRandom, PeopleFactory persona) {
         if(persona.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato)) {
-            originalImage.setRGB(secondoPixelRandom,primoPixelRandom,colorBlueMorigerati);
-            wr.getPixelWriter().setArgb(secondoPixelRandom,primoPixelRandom,colorBlueMorigerati);
+            originalImage.setRGB(secondoPixelRandom, primoPixelRandom, colorBlueMorigerati);
+            wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, colorBlueMorigerati);
             imageView.setImage(wr);
 
         }
         else if(persona.getBehaviour().equals(PeopleFactory.Behaviour.Avventuriero)) {
-            originalImage.setRGB(secondoPixelRandom,primoPixelRandom,colorRedAvventurieri);
-            wr.getPixelWriter().setArgb(secondoPixelRandom,primoPixelRandom,colorRedAvventurieri);
+            originalImage.setRGB(secondoPixelRandom, primoPixelRandom, colorRedAvventurieri);
+            wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, colorRedAvventurieri);
             imageView.setImage(wr);
         }
         else if(persona.getBehaviour().equals(PeopleFactory.Behaviour.Prudente)) {
-            originalImage.setRGB(secondoPixelRandom,primoPixelRandom,colorGreenPrudenti);
-            wr.getPixelWriter().setArgb(secondoPixelRandom,primoPixelRandom,colorGreenPrudenti);
+            originalImage.setRGB(secondoPixelRandom, primoPixelRandom, colorGreenPrudenti);
+            wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, colorGreenPrudenti);
             imageView.setImage(wr);
         }
         else if(persona.getBehaviour().equals(PeopleFactory.Behaviour.Spregiudicata)) {
-            originalImage.setRGB(secondoPixelRandom,primoPixelRandom,colorBrownSpregiudicate);
-            wr.getPixelWriter().setArgb(secondoPixelRandom,primoPixelRandom,colorBrownSpregiudicate);
+            originalImage.setRGB(secondoPixelRandom, primoPixelRandom, colorBrownSpregiudicate);
+            wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, colorBrownSpregiudicate);
             imageView.setImage(wr);
         }
 
@@ -768,17 +766,22 @@ public class GamePage {
                            int primoPixelRandom, int secondoPixelRandom, int color) {
 
 
-        if(0 <= secondoPixelRandom && secondoPixelRandom < originalImage.getWidth() &&
-                0 <= primoPixelRandom && secondoPixelRandom < originalImage.getHeight()) {
+        //if(0 <= secondoPixelRandom && secondoPixelRandom < originalImage.getWidth() &&
+          //      0 <= primoPixelRandom && secondoPixelRandom < originalImage.getHeight()) {
 
-            if( originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != 0) {
+            if(originalImage.getRGB(secondoPixelRandom,primoPixelRandom) != colorBlueMorigerati &&
+                    originalImage.getRGB(secondoPixelRandom,primoPixelRandom) != colorRedAvventurieri &&
+                    originalImage.getRGB(secondoPixelRandom,primoPixelRandom) != colorGreenPrudenti &&
+                    originalImage.getRGB(secondoPixelRandom,primoPixelRandom) != colorBrownSpregiudicate &&
+                    originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != 0) {
+
 
                 originalImage.setRGB(secondoPixelRandom, primoPixelRandom, color);
                 wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, color);
                 imageView.setImage(wr);
             }
         }
-    }
+   // }
 
 
 

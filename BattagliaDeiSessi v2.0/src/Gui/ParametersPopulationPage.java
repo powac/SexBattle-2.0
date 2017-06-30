@@ -18,6 +18,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import java.util.ArrayList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 
 public class ParametersPopulationPage {
@@ -71,8 +73,14 @@ public class ParametersPopulationPage {
                 "      Numero di persone della generazione 0\n");
         personeInizialiInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
 
-        Slider sliderP = new Slider(0, 1000000, 500); // Per la dimensione della fonte
-        ;
+        Slider sliderP = new Slider(0, 10000, 1000); // Per la dimensione della fonte
+        sliderP.setShowTickLabels(true);
+        sliderP.setShowTickMarks(true);
+        sliderP.setMajorTickUnit(5000);
+        sliderP.setMinorTickCount(1);
+        sliderP.setBlockIncrement(100);
+
+        final Label valueP = new Label(Integer.toString((int)sliderP.getValue()));
 
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -84,8 +92,13 @@ public class ParametersPopulationPage {
         anniTotaliInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
 
         Slider sliderA = new Slider(0, 1000, 150); // Per la dimensione della fonte
+        sliderA.setShowTickLabels(true);
+        sliderA.setShowTickMarks(true);
+        sliderA.setMajorTickUnit(200);
+        sliderA.setMinorTickCount(1);
+        sliderA.setBlockIncrement(10);
 
-
+        final Label valueA = new Label(Integer.toString((int)sliderA.getValue()));
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -94,9 +107,14 @@ public class ParametersPopulationPage {
         Text aInfo = new Text("    Inserisci   A : premio per la generazione di figli \n");
         aInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
 
-        Slider slidera = new Slider(8, 40, 12); // Per la dimensione della fonte
+        Slider slidera = new Slider(0, 100, 15); // Per la dimensione della fonte
+        slidera.setShowTickLabels(true);
+        slidera.setShowTickMarks(true);
+        slidera.setMajorTickUnit(20);
+        slidera.setMinorTickCount(5);
+        slidera.setBlockIncrement(1);
 
-
+        final Label valuea = new Label(Integer.toString((int)slidera.getValue()));
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -105,9 +123,14 @@ public class ParametersPopulationPage {
         Text bInfo = new Text("     Inserisci   B : costo del crescere figli \n");
         bInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
 
-        Slider sliderb = new Slider(8, 40, 12); // Per la dimensione della fonte
+        Slider sliderb = new Slider(0, 100, 20); // Per la dimensione della fonte
+        sliderb.setShowTickLabels(true);
+        sliderb.setShowTickMarks(true);
+        sliderb.setMajorTickUnit(20);
+        sliderb.setMinorTickCount(5);
+        sliderb.setBlockIncrement(1);
 
-
+        final Label valueb = new Label(Integer.toString((int)sliderb.getValue()));
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -116,9 +139,14 @@ public class ParametersPopulationPage {
         Text cInfo = new Text("     Inserisci   C : costo del corteggiamento \n");
         cInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
 
-        Slider sliderc = new Slider(8, 40, 12); // Per la dimensione della fonte
+        Slider sliderc = new Slider(0, 100, 3); // Per la dimensione della fonte
+        sliderc.setShowTickLabels(true);
+        sliderc.setShowTickMarks(true);
+        sliderc.setMajorTickUnit(20);
+        sliderc.setMinorTickCount(5);
+        sliderc.setBlockIncrement(1);
 
-
+        final Label valuec = new Label((Integer.toString((int)sliderc.getValue())));
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -169,25 +197,72 @@ public class ParametersPopulationPage {
         hTitolo.setAlignment(Pos.TOP_CENTER);
         hTitolo.setSpacing(30);
 
-        HBox hPersoneIniziali = new HBox(personeInizialiInfo, sliderP);
+
+
+        HBox hPersoneIniziali = new HBox(personeInizialiInfo, sliderP, valueP);
         hPersoneIniziali.setAlignment(Pos.TOP_CENTER);
         hPersoneIniziali.setSpacing(30);
 
-        HBox hAnniTotali = new HBox(anniTotaliInfo, sliderA);
+        sliderP.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                sliderP.setValue(new_val.intValue());
+                valueP.textProperty().setValue(String.valueOf((int) sliderP.getValue()));
+            }
+        });
+
+
+
+        HBox hAnniTotali = new HBox(anniTotaliInfo, sliderA, valueA);
         hAnniTotali.setAlignment(Pos.TOP_CENTER);
         hAnniTotali.setSpacing(30);
 
-        HBox hA = new HBox(aInfo, slidera);
+        sliderA.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                sliderA.setValue(new_val.intValue());
+                valueA.textProperty().setValue(String.valueOf((int) sliderA.getValue()));
+            }
+        });
+
+
+
+        HBox hA = new HBox(aInfo, slidera, valuea);
         hA.setAlignment(Pos.TOP_CENTER);
         hA.setSpacing(30);
 
-        HBox hB = new HBox(bInfo, sliderb);
+        slidera.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                slidera.setValue(new_val.intValue());
+                valuea.textProperty().setValue(String.valueOf((int) slidera.getValue()));
+            }
+        });
+
+
+
+        HBox hB = new HBox(bInfo, sliderb, valueb);
         hB.setAlignment(Pos.TOP_CENTER);
         hB.setSpacing(30);
 
-        HBox hC = new HBox(cInfo, sliderc);
+        sliderb.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                sliderb.setValue(new_val.intValue());
+                valueb.textProperty().setValue(String.valueOf((int) sliderb.getValue()));
+            }
+        });
+
+
+
+        HBox hC = new HBox(cInfo, sliderc, valuec);
         hC.setAlignment(Pos.TOP_CENTER);
         hC.setSpacing(30);
+
+        sliderc.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                sliderc.setValue(new_val.intValue());
+                valuec.textProperty().setValue(String.valueOf((int) sliderc.getValue()));
+            }
+        });
+
+
 
         HBox hSequenzialeParallelo = new HBox(sequenzialeParalleloInfo,choiceBoxSequenzialeParallelo);
         hSequenzialeParallelo.setAlignment(Pos.TOP_CENTER);

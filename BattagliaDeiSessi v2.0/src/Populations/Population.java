@@ -168,7 +168,7 @@ public class Population {
             nuovaPopolazione.addAll(popolazione);
 
             System.out.println("\nAnno corrente: " + Population.year);
-            System.out.println("Size prima del meeting: " + nuovaPopolazione.size());
+            System.out.println("Dimensioni prima del meeting: " + nuovaPopolazione.size());
 
             strategia.setNuovaPopolazione(nuovaPopolazione,null);
 
@@ -191,11 +191,10 @@ public class Population {
                 else {
                     break;
                 }
-
                 strategia.MeetingStrategy(primaPersonaRandom, secondaPersonaRandom, a, b, c, year);
             }
 
-            System.out.println("Size dopo del meeting: " + nuovaPopolazione.size());
+            System.out.println("Dimensioni dopo del meeting: " + nuovaPopolazione.size());
 
 
             if(!strategia.getNuovaPopolazione().isEmpty()) {
@@ -204,7 +203,6 @@ public class Population {
                 this.popolazione = nuovaPopolazione;
             }
         }
-
         Population.year++;
     }
 
@@ -228,22 +226,23 @@ public class Population {
      */
 
     public synchronized void parallelPopulationMeeting(MeetingStrategyFactory strategia) {
-        int np=Runtime.getRuntime().availableProcessors();
-        ExecutorService exec= Executors.newFixedThreadPool(np);
+        int np = Runtime.getRuntime().availableProcessors();
+        ExecutorService exec = Executors.newFixedThreadPool(np);
 
         List<PeopleFactory> nuovaPopolazione = new ArrayList<>();
 
         if(!popolazione.isEmpty()) {
+
             nuovaPopolazione.addAll(popolazione);
 
             System.out.println("\nAnno corrente: " + Population.year);
-            System.out.println("Size prima del meeting: " + nuovaPopolazione.size());
+            System.out.println("Dimensioni prima del meeting: " + nuovaPopolazione.size());
 
-            strategia.setNuovaPopolazione(nuovaPopolazione,exec);
+            strategia.setNuovaPopolazione(nuovaPopolazione, exec);
 
             while (popolazione.size() > 0) {
-                PeopleFactory primaPersonaRandom;
 
+                PeopleFactory primaPersonaRandom = null;
                 if (popolazione.size() > 0) {
                     primaPersonaRandom = popolazione.get(new Random().nextInt(popolazione.size()));
                     popolazione.remove(primaPersonaRandom);
@@ -251,8 +250,8 @@ public class Population {
                 else {
                     break;
                 }
-                PeopleFactory secondaPersonaRandom;
 
+                PeopleFactory secondaPersonaRandom = null;
                 if (popolazione.size() > 0) {
                     secondaPersonaRandom = popolazione.get(new Random().nextInt(popolazione.size()));
                     popolazione.remove(secondaPersonaRandom);
@@ -261,19 +260,19 @@ public class Population {
                     break;
                 }
                 if(primaPersonaRandom != null && secondaPersonaRandom != null) {
-                    exec.submit(()-> strategia.MeetingStrategy(primaPersonaRandom, secondaPersonaRandom, a, b, c, year));
+                    PeopleFactory finalPrimaPersonaRandom = primaPersonaRandom;
+                    PeopleFactory finalSecondaPersonaRandom = secondaPersonaRandom;
+                    exec.submit(()-> strategia.MeetingStrategy(finalPrimaPersonaRandom, finalSecondaPersonaRandom, a, b, c, year));
                 }
 
             }
-
-
 
             while (!exec.isShutdown()) {
                 // attende lo shutdown nella strategy
             }
             //exec.shutdownNow();
 
-            System.out.println("Size dopo del meeting: " + nuovaPopolazione.size());
+            System.out.println("Dimensioni dopo del meeting: " + nuovaPopolazione.size());
 
             if(!strategia.getNuovaPopolazione().isEmpty()) {
                 nuovaPopolazione = strategia.getNuovaPopolazione();
@@ -282,5 +281,4 @@ public class Population {
         }
         Population.year++;
     }
-
 }

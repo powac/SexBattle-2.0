@@ -124,7 +124,7 @@ public class StrategyPage {
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-        Text infoTip=new Text("Fermati sopra una strategia per vedere le informazioni \n");
+        Text infoTip = new Text("Fermati sopra una strategia per vedere le informazioni \n");
         infoTip.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -161,20 +161,46 @@ public class StrategyPage {
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+
+        Button indietro = new Button("  Indietro  ");
+        indietro.setPrefSize(190,80);
+        indietro.setStyle("-fx-font: 16 Symbol; -fx-base: #FF0000; -fx-background-color: #6CCF3A; -fx-background-radius: 40 40 40 40;");
+
+        SfondoBottone(indietro);
+
+
+        indietro.setOnAction(e -> {
+            if(gameFactoryStrategiaSelezionata != null) {
+                GamePage gamePage = new GamePage(primaryStage);
+                try {
+                    gamePage.startGamePage(personeIniziali, anniTotali, a, b, c, parallelo, gameFactoryStrategiaSelezionata);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            else if(strategiaRandomica[0] == true) {
+                PersonalRandomStrategyPage personalRandomStrategyPage = new PersonalRandomStrategyPage(primaryStage);
+                personalRandomStrategyPage.startPersonalRandomStrategy(personeIniziali, anniTotali, a, b, c, parallelo);
+            }
+        });
+
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
         HBox hTitolo = new HBox(titolo);
         hTitolo.setAlignment(Pos.TOP_CENTER);
         hTitolo.setSpacing(30);
 
-        HBox hAvanti = new HBox(avanti);
-        hAvanti.setAlignment(Pos.TOP_CENTER);
-        hAvanti.setSpacing(30);
+        HBox hba = new HBox(indietro, avanti);
+        hba.setAlignment(Pos.TOP_CENTER);
+        hba.setSpacing(500);
+
 
         HBox hTable = new HBox(tableView);
         hTable.setAlignment(Pos.TOP_CENTER);
         hTable.setSpacing(30);
 
 
-        VBox vb = new VBox(hTitolo,hTable,infoTip,hAvanti);
+        VBox vb = new VBox(hTitolo, hTable, infoTip, hba);
         vb.setAlignment(Pos.TOP_CENTER);
         vb.setSpacing(10);
 
