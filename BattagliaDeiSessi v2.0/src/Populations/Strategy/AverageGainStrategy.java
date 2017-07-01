@@ -2,6 +2,7 @@ package Populations.Strategy;
 
 import Humans.People;
 import Humans.PeopleFactory;
+import Populations.Population;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -53,21 +54,21 @@ public class AverageGainStrategy implements MeetingStrategyFactory {
             if (primaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Avventuriero) &&
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Spregiudicata)) {
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > 7.5) {
-                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp((nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() + (guadagnoAvventuriero)));
                 }
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > 0) {
-                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() + (guadagnoSpregiudicata));
                 }
             } else if (primaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Spregiudicata) &&
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Avventuriero)) {
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > 0) {
-                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() + (guadagnoSpregiudicata));
                 }
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > 7.5) {
-                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp((nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() + (guadagnoAvventuriero)));
                 }
             }
@@ -85,21 +86,21 @@ public class AverageGainStrategy implements MeetingStrategyFactory {
             if (primaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato) &&
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Prudente)) {
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > 3.5) {
-                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp((nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() + (guadagnoMorigerato)));
                 }
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > 1) {
-                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() + (guadagnoPrudente));
                 }
             } else if (primaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Prudente) &&
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato)) {
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > 1) {
-                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() + (guadagnoPrudente));
                 }
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > 3.5) {
-                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp((nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() + (guadagnoMorigerato)));
                 }
             }
@@ -119,21 +120,21 @@ public class AverageGainStrategy implements MeetingStrategyFactory {
             if (primaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato) &&
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Spregiudicata)) {
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > 3.5) {
-                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp((nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() + (guadagnoMorigerato)));
                 }
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > 0) {
-                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() + (guadagnoSpregiudicata));
                 }
             } else if (primaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Spregiudicata) &&
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato)) {
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > 0) {
-                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() + (guadagnoSpregiudicata));
                 }
                 if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > 3.5) {
-                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                    nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                     nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp((nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() + (guadagnoMorigerato)));
                 }
             }

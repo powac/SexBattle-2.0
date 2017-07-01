@@ -13,7 +13,7 @@ public class People implements PeopleFactory {
     private Behaviour kind;
     private Integer age;
     private Float hp;
-    private int yearOfBirth;
+    private Integer yearOfBirth;
     /** Fattore random per determinazione del sesso, differente da rk per non generare lo stesso valore */
     private double rs = Math.random();
 	/** Fattore random per determinazione del tipo, differente da rs per non generare lo stesso valore */
@@ -25,7 +25,7 @@ public class People implements PeopleFactory {
 	/**
 	 * Questo costruttore genera oggetti {@link People}.
 	 * <br> La funzione accetta come parametro un array (di dimensione variabile),
-	 * ma costruisce effettivamente con al più cinque diversi parametri.
+	 * ma costruisce effettivamente con al più 4 diversi parametri.
 	 * Se vengono inseriti più volte parametri che si riferiscono ad uno stesso attributo dell'oggetto,
 	 * verrà considerato solo l'ultimo inserito.
 	 * <br> Gli attributi mancanti in input verranno inseriti automaticamente dalle funzioni Random integrate
@@ -69,13 +69,13 @@ public class People implements PeopleFactory {
 					kind = Behaviour.Spregiudicata;
     		}
     		else if (p instanceof Integer) {
-    				int i = (Integer) p;
-    				if(i > 120) {
-    					throw new IllegalStateException("Una persona dei nostri giorni non "
-    							+ "\npuò vivere per più di -NumeroACasoMoltoGrande- anni!");
-    				} else {
-    					this.age = i;
-    				}
+                Integer i = (Integer) p;
+                if(i < Population.year - 120) {
+                    throw new IllegalStateException("Una persona dei nostri giorni non "
+                            + "\npuò vivere per più di -NumeroACasoMoltoGrande- anni!");
+                } else {
+                    this.yearOfBirth = i;
+                }
     		}
     		else if(p instanceof Float) {
     			hp = (Float) p;
@@ -88,9 +88,9 @@ public class People implements PeopleFactory {
     	// creazione casuale dei dati mancanti
 		if(Objects.isNull(sex))  		   this.setRandomSexuality();
 		if(Objects.isNull(kind)) 		   this.setRandomBehaviour();
-		if(Objects.isNull(age))            this.setRandomAge();
+		if(Objects.isNull(yearOfBirth))    this.setRandomYearOfBirth();
 		if(Objects.isNull(hp))             this.setRandomHP();
-		this.setYearOfBirth();
+		this.setAge();
 	}
     
      
@@ -154,6 +154,16 @@ public class People implements PeopleFactory {
 
 
 
+
+	/** Strettamente legato a setRandomYearOfBirth(), questo metodo si serve di un valore intero randomico
+	 * compreso in un range che va da 0 a 120. */
+	private synchronized void setAge() {
+		this.age = Population.year - this.yearOfBirth;
+	}
+
+
+
+
     
     /** Imposta artificialmente il valore degli hp */
     @Override
@@ -165,13 +175,9 @@ public class People implements PeopleFactory {
 
 
     
-    /** Strettamente legato a setRandomAge(), questo metodo restituisce la data di nascita di un individuo
-     * <br>secondo la funzione Fn = AnnoCorrente - Età. */
-    private synchronized void setYearOfBirth() {
-    	this.yearOfBirth = Population.year - age;
-    }
-    
-    
+
+
+
 
     // Da qui, i metodi setRandom.
        
@@ -252,17 +258,7 @@ public class People implements PeopleFactory {
     			this.kind = PeopleFactory.Behaviour.Prudente;
     		}
     	}
-    } 
-
-
-
-
-    
-    /** Strettamente legato a setRandomYearOfBirth(), questo metodo si serve di un valore intero randomico
-     * compreso in un range che va da 0 a 120. */
-    private synchronized void setRandomAge() {
-    	this.age = randomInt.nextInt(120);
-    	}
+    }
     
 
 
@@ -272,4 +268,13 @@ public class People implements PeopleFactory {
     private synchronized void setRandomHP() {
     	this.hp = (float) randomInt.nextInt(100);
     }
+
+
+
+
+	/** Strettamente legato a setRandomAge(), questo metodo restituisce la data di nascita di un individuo
+	 * <br>secondo la funzione Fn = AnnoCorrente - Età. */
+	private synchronized void setRandomYearOfBirth() {
+		this.yearOfBirth = Population.year - randomInt.nextInt(120);
+	}
 }

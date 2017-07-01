@@ -2,6 +2,7 @@ package Populations.Strategy;
 
 import Humans.People;
 import Humans.PeopleFactory;
+import Populations.Population;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -48,11 +49,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >= 0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2));
                     }
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2);
                     }
                 }
@@ -63,11 +64,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0)
                 {
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2);
                     }
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2));
                     }
                 }
@@ -101,11 +102,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >=0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2));
                     }
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2);
                     }
                 }
@@ -113,13 +114,13 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
             } else if (primaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Prudente) &&
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato)) {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >=0 &&
-                        nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp()>=0) {
+                        nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2);
                     }
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2));
                     }
                 }
@@ -149,14 +150,14 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
 
             if (primaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato) &&
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Spregiudicata)) {
-                if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >=0 &&
+                if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >= 0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2));
                     }
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2);
                     }
                 }
@@ -166,11 +167,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >=0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2);
                     }
                     if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
-                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), 0, 0.0));
+                        nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2));
                     }
                 }
@@ -196,7 +197,7 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
         }
 
 
-        if(quantiSono <= 1 && exec!=null) {
+        if(quantiSono <= 1 && exec != null) {
             exec.shutdown();
         }
 
@@ -223,7 +224,7 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
         quantiSono = nuovaPopolazione.size();
 
         if(exec != null) {
-            this.exec=exec;
+            this.exec = exec;
         }
     }
 

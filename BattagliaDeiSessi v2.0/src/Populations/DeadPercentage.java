@@ -45,7 +45,7 @@ public class DeadPercentage {
      */
 
     public synchronized List<PeopleFactory> afterDeath(int percentageDeathBehaviour) {
-        if(percentageDeathBehaviour<0) {
+        if(percentageDeathBehaviour < 0) {
             throw new IllegalStateException("La % della popolazione da eliminare è negativa");
         }
 
@@ -70,13 +70,6 @@ public class DeadPercentage {
         }
 
 
-
-        /*
-        System.out.println("morigerati: "+morigeratiNumero);
-        System.out.println("avventurieri: "+avventurieriNumero);
-        System.out.println("prudenti: "+prudentiNumero);
-        System.out.println("spregiudicate: "+spregiudicateNumero);
-        */
 
 
 

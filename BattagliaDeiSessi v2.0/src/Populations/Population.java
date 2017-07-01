@@ -40,7 +40,7 @@ public class Population {
     private int b;// = 20;
     private int c;// = 3;
 
-    public static int year = 2001;
+    public static int year = 2000;
 
 
 
@@ -62,7 +62,7 @@ public class Population {
         if (popolazione.isEmpty()) {
             throw new IllegalStateException("Set<People> popolazione vuota");
         }
-        this.popolazione = new ArrayList<PeopleFactory>(popolazione);
+        this.popolazione = popolazione;
     }
 
 
@@ -266,13 +266,12 @@ public class Population {
                 }
 
             }
-
             while (!exec.isShutdown()) {
                 // attende lo shutdown nella strategy
-            }
+                }
             //exec.shutdownNow();
 
-            System.out.println("Dimensioni dopo del meeting: " + nuovaPopolazione.size());
+            System.out.println("Dimensioni dopo il meeting: " + nuovaPopolazione.size());
 
             if(!strategia.getNuovaPopolazione().isEmpty()) {
                 nuovaPopolazione = strategia.getNuovaPopolazione();

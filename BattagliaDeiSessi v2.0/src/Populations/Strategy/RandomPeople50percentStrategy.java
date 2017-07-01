@@ -2,6 +2,7 @@ package Populations.Strategy;
 
 import Humans.People;
 import Humans.PeopleFactory;
+import Populations.Population;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -45,10 +46,10 @@ public class RandomPeople50percentStrategy implements MeetingStrategyFactory {
 
 
             if(randomFiglio < 0.5) {
-                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Avventuriero, 0, 0.0));
+                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Avventuriero, Population.year, 0.0));
             }
             else if(randomFiglio >= 0.5) {
-                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Spregiudicata, 0, 0.0));
+                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Spregiudicata, Population.year, 0.0));
             }
 
 
@@ -58,10 +59,10 @@ public class RandomPeople50percentStrategy implements MeetingStrategyFactory {
 
 
             if(randomFiglio < 0.5) {
-                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Morigerato, 0, 0.0));
+                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Morigerato, Population.year, 0.0));
             }
             else if(randomFiglio >= 0.5) {
-                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Prudente, 0, 0.0));
+                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Prudente, Population.year, 0.0));
             }
 
 
@@ -72,10 +73,10 @@ public class RandomPeople50percentStrategy implements MeetingStrategyFactory {
 
 
             if(randomFiglio < 0.5) {
-                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Morigerato, 0, 0.0));
+                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Morigerato, Population.year, 0.0));
             }
             else if(randomFiglio >= 0.5) {
-                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Spregiudicata, 0, 0.0));
+                nuovaPopolazione.add(new People(PeopleFactory.Behaviour.Spregiudicata, Population.year, 0.0));
             }
 
         }

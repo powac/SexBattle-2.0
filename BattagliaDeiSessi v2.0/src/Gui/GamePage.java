@@ -25,7 +25,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -104,9 +103,6 @@ public class GamePage {
     private static int blueWhite = 255;                                            // blue component 0...255
     private static int alphaWhite = 255;                                          // alpha (transparency) component 0...255
     private static int colorWhiteAreaBomb = (alphaWhite << 24) | (redWhite << 16) | (greenWhite << 8) | blueWhite;
-
-
-    public static Circle cc = new Circle(20.0,20.0,20.0);
 
 
 
@@ -436,7 +432,7 @@ public class GamePage {
                 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-                Map< List<Integer> , PeopleFactory > mappaPersonaPixel = new HashMap<>();
+            /*    Map< List<Integer> , PeopleFactory > mappaPersonaPixel = new HashMap<>();
 
                 for(PeopleFactory persona : popolazioneUniverso.getPopulation()) {
                     int primoPixelRandom;
@@ -528,7 +524,7 @@ public class GamePage {
 
                 });
 
-
+*/
 
                 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -609,7 +605,7 @@ public class GamePage {
 
                             drawPeoplePixel(originalImage, imView, wr, primoPixelRandom, secondoPixelRandom, persona);
 
-                            mappaPersonaPixel.put(new ArrayList<>(Arrays.asList(secondoPixelRandom, primoPixelRandom)), persona);
+                 //           mappaPersonaPixel.put(new ArrayList<>(Arrays.asList(secondoPixelRandom, primoPixelRandom)), persona);
 
                         }
                         vecchiaPopolazione.addAll(nuovaPopolazione);
@@ -781,7 +777,6 @@ public class GamePage {
                 imageView.setImage(wr);
             }
         }
-   // }
 
 
 

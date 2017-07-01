@@ -133,10 +133,4 @@ public interface PeopleFactory {
     /** Da usare in fase di creazione popolazioni. */
     public void setHp(float h);
 
-
-
-
-     // anni per il quale la persona non può procreare - al momento inutilizzato
-     	//public void setStop(int stop);
-     	//public int getStop();
 }

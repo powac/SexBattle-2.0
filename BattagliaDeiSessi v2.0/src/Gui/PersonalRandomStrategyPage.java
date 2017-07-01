@@ -35,7 +35,7 @@ public class PersonalRandomStrategyPage {
 
     public PersonalRandomStrategyPage(Stage primaryStage)
     {
-        this.primaryStage=primaryStage;
+        this.primaryStage = primaryStage;
     }
 
     public synchronized void startPersonalRandomStrategy(int personeIniziali, int anniTotali, int a, int b, int c, boolean parallelo) {
@@ -50,7 +50,7 @@ public class PersonalRandomStrategyPage {
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-        Text titolo = new Text("Crea la tua strategia evolutiva random personalizzata");
+        Text titolo = new Text(" Crea la tua strategia evolutiva random personalizzata ");
         titolo.setFont(Font.font("Papyrus", FontPosture.ITALIC, 65));
         HBox.setHgrow(titolo, Priority.ALWAYS);// Si estende in orizzontale
         titolo.setFill(Color.BLUE);
