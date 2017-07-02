@@ -116,6 +116,7 @@ public class StrategyPage {
                     }
                     else {
                         gameFactoryStrategiaSelezionata = StrategyFactories.getBoardFactory(row.getItem().getFirstName());
+                        strategiaRandomica[0] = false;
                     }
                 }
             });
@@ -138,8 +139,8 @@ public class StrategyPage {
 
 
         avanti.setOnAction(e -> {
-            if(gameFactoryStrategiaSelezionata!=null) {
-                GamePage gamePage=new GamePage(primaryStage);
+            if(gameFactoryStrategiaSelezionata != null && strategiaRandomica[0] == false) {
+                GamePage gamePage = new GamePage(primaryStage);
                 try {
                     gamePage.startGamePage(personeIniziali, anniTotali, a, b, c, parallelo, gameFactoryStrategiaSelezionata);
                 } catch (IOException e1) {

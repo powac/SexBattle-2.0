@@ -48,11 +48,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Spregiudicata)) {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >= 0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2));
                     }
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2);
                     }
@@ -63,11 +63,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >=0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0)
                 {
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2);
                     }
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2));
                     }
@@ -101,11 +101,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Prudente)) {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >=0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2));
                     }
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2);
                     }
@@ -115,11 +115,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato)) {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >=0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2);
                     }
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2));
                     }
@@ -152,11 +152,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Spregiudicata)) {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >= 0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2));
                     }
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2);
                     }
@@ -166,11 +166,11 @@ public class OverXvalueStrategy implements MeetingStrategyFactory {
                     secondaPersonaRandom.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato)) {
                 if(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() >=0 &&
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() >= 0) {
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(primaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).setHp(nuovaPopolazione.get(nuovaPopolazione.indexOf(primaPersonaRandom)).getHp() - a*2);
                     }
-                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*2) {
+                    if (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() > a*3) {
                         nuovaPopolazione.add(new People(secondaPersonaRandom.getBehaviour(), Population.year, 0.0));
                         nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).setHp((float) (nuovaPopolazione.get(nuovaPopolazione.indexOf(secondaPersonaRandom)).getHp() - a*2));
                     }

@@ -28,8 +28,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.awt.*;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageProducer;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.*;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -50,8 +54,8 @@ public class GamePage {
 
     private static Stage primaryStage;
 
-    private final int width = 1920;
-    private final int height = 1080;
+    private final int width = 1366;
+    private final int height = 768;
 
     private static String pathImmagineBackground;
     private static Thread threadAggiornaPixel;
@@ -101,7 +105,7 @@ public class GamePage {
     private static int redWhite = 255;                                            // red component 0...255
     private static int greenWhite = 255;                                            // green component 0...255
     private static int blueWhite = 255;                                            // blue component 0...255
-    private static int alphaWhite = 255;                                          // alpha (transparency) component 0...255
+    private static int alphaWhite = 100;                                          // alpha (transparency) component 0...255
     private static int colorWhiteAreaBomb = (alphaWhite << 24) | (redWhite << 16) | (greenWhite << 8) | blueWhite;
 
 
@@ -117,7 +121,7 @@ public class GamePage {
     public synchronized void startGamePage(int personeIniziali, int anniTotali, int a, int b, int c,
                                            boolean parallelo, MeetingStrategyFactory strategiaSelezionata) throws IOException {
 
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 
             @Override
             public void handle(WindowEvent event) {       // gestisce l'uscita inaspettata dalla GUI
@@ -130,7 +134,6 @@ public class GamePage {
             }
         });
 
-
         GamePage.personeIniziali = personeIniziali;
         GamePage.anniTotali = anniTotali;
         GamePage.a = a;
@@ -140,9 +143,9 @@ public class GamePage {
         GamePage.strategiaSelezionata = strategiaSelezionata;
 
 
-        pathImmagineBackground = getClass().getResource("world.jpg").toString();
+        pathImmagineBackground = getClass().getResource("Sotto.jpg").toString();
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
         Text titolo = new Text(" M o n d o ");
 
@@ -151,57 +154,57 @@ public class GamePage {
         titolo.setFill(Color.BLUE);
 
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
         Text anniTrascorsi = new Text("Anno corrente: " + 2000);
         anniTrascorsi.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
-        anniTrascorsi.setFill(Color.WHITE);
+        anniTrascorsi.setFill(Color.BLACK);
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
 
         Text numeroMaschi = new Text("Maschi: " + 0);
         numeroMaschi.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
-        numeroMaschi.setFill(Color.WHITE);
+        numeroMaschi.setFill(Color.BLACK);
 
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
 
         Text numeroFemmine = new Text("Femmine: " + 0);
         numeroFemmine.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
-        numeroFemmine.setFill(Color.WHITE);
+        numeroFemmine.setFill(Color.BLACK);
 
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
         Text numeroMorigerati = new Text("Morigerati: " + 0);
         numeroMorigerati.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
         numeroMorigerati.setFill(Color.BLUE);
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
         Text numeroAvventurieri = new Text("Avventurieri: " + 0);
         numeroAvventurieri.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
         numeroAvventurieri.setFill(Color.RED);
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
 
         Text numeroPrudenti = new Text("Prudenti: " + 0);
         numeroPrudenti.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
         numeroPrudenti.setFill(Color.GREEN);
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
 
         Text numeroSpregiudicate = new Text("Spregiudicate: " + 0);
         numeroSpregiudicate.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
         numeroSpregiudicate.setFill(Color.BROWN);
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
-        BufferedImage originalImage = ImageIO.read(getClass().getResource("World.png"));
+        BufferedImage originalImage = ImageIO.read(getClass().getResource("Sopra.png"));
         WritableImage wr = null;
         if (originalImage != null) {
             wr = new WritableImage(originalImage.getWidth(), originalImage.getHeight());
@@ -214,9 +217,11 @@ public class GamePage {
                 }
             }
         }
+
         ImageView imView = new ImageView(wr);
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
+
 
         Button chartBehaviour = new Button("Grafico");
         chartBehaviour.setPrefSize(100,40);
@@ -226,7 +231,7 @@ public class GamePage {
         chartBehaviour.setDisable(true);
 
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
         int matriceBomba[][] = new int[originalImage.getWidth()][originalImage.getHeight()];
 
@@ -236,7 +241,7 @@ public class GamePage {
             }
         }
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
         Button atomicBomb = new Button("Bomba\nAtomica");
         atomicBomb.setPrefSize(100,60);
@@ -245,7 +250,7 @@ public class GamePage {
         SfondoBottone(atomicBomb);
         atomicBomb.setDisable(true);
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //-------------------------------------------------------------------------------------------------------------------------
 
         terminaPartita = false;
 
@@ -324,11 +329,11 @@ public class GamePage {
         vbButton.setSpacing(40);
 
         HBox hWorld = new HBox(imView, vbButton);
-        hWorld.setAlignment(Pos.TOP_CENTER);
+        hWorld.setAlignment(Pos.CENTER_LEFT);
         hWorld.setSpacing(30);
 
         HBox hInfo = new HBox(startStop, anniTrascorsi, numeroMaschi, numeroFemmine, terminaGioco);
-        hInfo.setAlignment(Pos.TOP_CENTER);
+        hInfo.setAlignment(Pos.TOP_LEFT);
         hInfo.setSpacing(30);
 
         HBox hBehaviour = new HBox(numeroMorigerati, numeroAvventurieri, numeroPrudenti, numeroSpregiudicate);
@@ -336,19 +341,25 @@ public class GamePage {
         hBehaviour.setSpacing(30);
 
 
-        VBox vb = new VBox(hTitolo, hWorld, hInfo, hBehaviour);
+        VBox vb = new VBox(hWorld);
+        vb.setAlignment(Pos.TOP_LEFT);
+        vb.setSpacing(0);
+
+        VBox vbcontainer = new VBox(hTitolo, vb, hInfo, hBehaviour);
         vb.setAlignment(Pos.TOP_CENTER);
-        vb.setSpacing(20);
+        vb.setSpacing(0);
 
 
-        vb.setStyle( " -fx-background-image: url( " + pathImmagineBackground + "); " + " -fx-background-position: left top, center; "
-                + " -fx-background-repeat: repeat; " + " -fx-background-size: stretch; " + "-fx-background-size: cover, auto;" + "-fx-opacity: 0.8;");
+        vb.setStyle( " -fx-background-image: url( " + pathImmagineBackground + "); " +
+                " -fx-background-position: 0 0; " +
+                " -fx-background-repeat: no-repeat; " +
+                " -fx-background-size: 600 500; ");
 
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-        ScrollPane scrollPane = new ScrollPane(vb);
+        ScrollPane scrollPane = new ScrollPane(vbcontainer);
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
 
@@ -432,7 +443,7 @@ public class GamePage {
                 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-            /*    Map< List<Integer> , PeopleFactory > mappaPersonaPixel = new HashMap<>();
+                Map< List<Integer> , PeopleFactory > mappaPersonaPixel = new HashMap<>();
 
                 for(PeopleFactory persona : popolazioneUniverso.getPopulation()) {
                     int primoPixelRandom;
@@ -524,7 +535,7 @@ public class GamePage {
 
                 });
 
-*/
+
 
                 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -605,7 +616,7 @@ public class GamePage {
 
                             drawPeoplePixel(originalImage, imView, wr, primoPixelRandom, secondoPixelRandom, persona);
 
-                 //           mappaPersonaPixel.put(new ArrayList<>(Arrays.asList(secondoPixelRandom, primoPixelRandom)), persona);
+                            mappaPersonaPixel.put(new ArrayList<>(Arrays.asList(secondoPixelRandom, primoPixelRandom)), persona);
 
                         }
                         vecchiaPopolazione.addAll(nuovaPopolazione);
@@ -727,28 +738,29 @@ public class GamePage {
 
 
 
-    private synchronized void drawPeoplePixel(BufferedImage originalImage,ImageView imageView,WritableImage wr,
+    private synchronized void drawPeoplePixel(BufferedImage originalImage, ImageView imView,
+                                              WritableImage wr,
                            int primoPixelRandom, int secondoPixelRandom, PeopleFactory persona) {
         if(persona.getBehaviour().equals(PeopleFactory.Behaviour.Morigerato)) {
             originalImage.setRGB(secondoPixelRandom, primoPixelRandom, colorBlueMorigerati);
             wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, colorBlueMorigerati);
-            imageView.setImage(wr);
+            imView.setImage(wr);
 
         }
         else if(persona.getBehaviour().equals(PeopleFactory.Behaviour.Avventuriero)) {
             originalImage.setRGB(secondoPixelRandom, primoPixelRandom, colorRedAvventurieri);
             wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, colorRedAvventurieri);
-            imageView.setImage(wr);
+            imView.setImage(wr);
         }
         else if(persona.getBehaviour().equals(PeopleFactory.Behaviour.Prudente)) {
             originalImage.setRGB(secondoPixelRandom, primoPixelRandom, colorGreenPrudenti);
             wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, colorGreenPrudenti);
-            imageView.setImage(wr);
+            imView.setImage(wr);
         }
         else if(persona.getBehaviour().equals(PeopleFactory.Behaviour.Spregiudicata)) {
             originalImage.setRGB(secondoPixelRandom, primoPixelRandom, colorBrownSpregiudicate);
             wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, colorBrownSpregiudicate);
-            imageView.setImage(wr);
+            imView.setImage(wr);
         }
 
     }

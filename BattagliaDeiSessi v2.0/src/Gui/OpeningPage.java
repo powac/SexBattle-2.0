@@ -59,7 +59,7 @@ public class OpeningPage {
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
 
-        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
         ParametersPopulationPage ppp = new ParametersPopulationPage(primaryStage);
         delay.setOnFinished( e ->
                 ppp.startParametersPopulationPage());

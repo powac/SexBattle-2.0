@@ -1,6 +1,8 @@
 package Gui;
 
 import Populations.Strategy.PersonalRandomStrategy;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -50,8 +52,8 @@ public class PersonalRandomStrategyPage {
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-        Text titolo = new Text(" Crea la tua strategia evolutiva random personalizzata ");
-        titolo.setFont(Font.font("Papyrus", FontPosture.ITALIC, 65));
+        Text titolo = new Text(" Crea una strategia evolutiva personalizzata ");
+        titolo.setFont(Font.font("Papyrus", FontPosture.ITALIC, 35));
         HBox.setHgrow(titolo, Priority.ALWAYS);// Si estende in orizzontale
         titolo.setFill(Color.BLUE);
 
@@ -62,24 +64,31 @@ public class PersonalRandomStrategyPage {
         infoAvventurieroSpregiudicata.setFill(Color.BLUEVIOLET);
 
 
-        Text infoAvventurieroSpregiudicataFiglioAvventuriero = new Text("                              Probabilità di fare un figlio Avventuriero in %: \n");
+        Text infoAvventurieroSpregiudicataFiglioAvventuriero = new Text("Probabilità che il  figlio sia Avventuriero in %: \n");
         infoAvventurieroSpregiudicataFiglioAvventuriero.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
         ArrayList<Integer> listaValoriAvventurieroSpregiudicataFiglioAvventuriero = new ArrayList<>();
         for(int i = 0; i <= 100; i = i+10) {
             listaValoriAvventurieroSpregiudicataFiglioAvventuriero.add(i);
         }
-        ChoiceBox choiceBoxAvventurieroSpregiudicataFiglioAvventuriero = new ChoiceBox(FXCollections.observableArrayList(listaValoriAvventurieroSpregiudicataFiglioAvventuriero));
-        choiceBoxAvventurieroSpregiudicataFiglioAvventuriero.setValue(0);
+
+        Slider sliderAs = new Slider(0, 100, 50); // Per la dimensione della fonte
+        sliderAs.setShowTickLabels(true);
+        sliderAs.setShowTickMarks(true);
+        sliderAs.setMajorTickUnit(20);
+        sliderAs.setMinorTickCount(1);
+        sliderAs.setBlockIncrement(1);
+
+        final Label valueAsa = new Label(Integer.toString((int)sliderAs.getValue()));
+        final Label valueAss = new Label(Integer.toString(100 - (int)sliderAs.getValue()));
 
 
-        Text infoAvventurieroSpregiudicataFiglioSpregiudicata = new Text("                              Probabilità di fare una figlia Spregiudicata in %: \n");
+        Text infoAvventurieroSpregiudicataFiglioSpregiudicata = new Text("Probabilità che la figlia sia Spregiudicata in %: \n");
         infoAvventurieroSpregiudicataFiglioSpregiudicata.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
         ArrayList<Integer> listaValoriAvventurieroSpregiudicataFiglioSpregiudicata = new ArrayList<>();
         for(int i = 0; i <=100 ; i = i+10) {
             listaValoriAvventurieroSpregiudicataFiglioSpregiudicata.add(i);
         }
-        ChoiceBox choiceBoxAvventurieroSpregiudicataFiglioSpregiudicata = new ChoiceBox(FXCollections.observableArrayList(listaValoriAvventurieroSpregiudicataFiglioSpregiudicata));
-        choiceBoxAvventurieroSpregiudicataFiglioSpregiudicata.setValue(0);
+
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -90,24 +99,32 @@ public class PersonalRandomStrategyPage {
 
 
 
-        Text infoMorigeratoPrudenteFiglioMorigerato = new Text("                              Probabilità di fare un figlio Morigerato in %: \n");
+        Text infoMorigeratoPrudenteFiglioMorigerato = new Text("Probabilità che il figlio sia Morigerato in %: \n");
         infoMorigeratoPrudenteFiglioMorigerato.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
         ArrayList<Integer> listaValoriMorigeratoPrudenteFiglioMorigerato = new ArrayList<>();
         for(int i = 0; i <= 100; i = i+10) {
             listaValoriMorigeratoPrudenteFiglioMorigerato.add(i);
         }
-        ChoiceBox choiceBoxMorigeratoPrudenteFiglioMorigerato = new ChoiceBox(FXCollections.observableArrayList(listaValoriMorigeratoPrudenteFiglioMorigerato));
-        choiceBoxMorigeratoPrudenteFiglioMorigerato.setValue(0);
+
+        Slider sliderMp = new Slider(0, 100, 50); // Per la dimensione della fonte
+        sliderMp.setShowTickLabels(true);
+        sliderMp.setShowTickMarks(true);
+        sliderMp.setMajorTickUnit(20);
+        sliderMp.setMinorTickCount(1);
+        sliderMp.setBlockIncrement(1);
+
+        final Label valueMpm = new Label(Integer.toString((int)sliderMp.getValue()));
+        final Label valueMpp = new Label(Integer.toString(100 - (int)sliderMp.getValue()));
 
 
-        Text infoMorigeratoPrudenteFiglioPrudente = new Text("                              Probabilità di fare una figlia Prudente in %: \n");
+
+        Text infoMorigeratoPrudenteFiglioPrudente = new Text("Probabilità che la figlia sia Prudente in %: \n");
         infoMorigeratoPrudenteFiglioPrudente.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
         ArrayList<Integer> listaValoriMorigeratoPrudenteFiglioPrudente = new ArrayList<>();
         for(int i = 0; i <= 100; i = i+10) {
             listaValoriMorigeratoPrudenteFiglioPrudente.add(i);
         }
-        ChoiceBox choiceBoxMorigeratoPrudenteFiglioPrudente = new ChoiceBox(FXCollections.observableArrayList(listaValoriMorigeratoPrudenteFiglioPrudente));
-        choiceBoxMorigeratoPrudenteFiglioPrudente.setValue(0);
+
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -117,24 +134,32 @@ public class PersonalRandomStrategyPage {
         infoMorigeratoSpregiudicata.setFill(Color.BLUEVIOLET);
 
 
-        Text infoMorigeratoSpregiudicataFiglioMorigerato = new Text("                              Probabilità di fare un figlio Morigerato in %: \n");
+        Text infoMorigeratoSpregiudicataFiglioMorigerato = new Text("Probabilità che il figlio sia Morigerato in %: \n");
         infoMorigeratoSpregiudicataFiglioMorigerato.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
         ArrayList<Integer> listaValoriMorigeratoSpregiudicataFiglioMorigerato = new ArrayList<>();
         for(int i = 0; i <= 100; i = i+10) {
             listaValoriMorigeratoSpregiudicataFiglioMorigerato.add(i);
         }
-        ChoiceBox choiceBoxMorigeratoSpregiudicataFiglioMorigerato = new ChoiceBox(FXCollections.observableArrayList(listaValoriMorigeratoSpregiudicataFiglioMorigerato));
-        choiceBoxMorigeratoSpregiudicataFiglioMorigerato.setValue(0);
+
+        Slider sliderMs = new Slider(0, 100, 50); // Per la dimensione della fonte
+        sliderMs.setShowTickLabels(true);
+        sliderMs.setShowTickMarks(true);
+        sliderMs.setMajorTickUnit(20);
+        sliderMs.setMinorTickCount(1);
+        sliderMs.setBlockIncrement(1);
+
+        final Label valueMsm = new Label(Integer.toString((int)sliderMs.getValue()));
+        final Label valueMss = new Label(Integer.toString(100 - (int)sliderMs.getValue()));
 
 
-        Text infoMorigeratoSpregiudicataFiglioSpregiudicata = new Text("                              Probabilità di fare una figlia Spregiudicata in %: \n");
+
+        Text infoMorigeratoSpregiudicataFiglioSpregiudicata = new Text("Probabilità che la figlia sia Spregiudicata in %: \n");
         infoMorigeratoSpregiudicataFiglioSpregiudicata.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
         ArrayList<Integer> listaValoriMorigeratoSpregiudicataFiglioSpregiudicata = new ArrayList<>();
         for(int i = 0; i <= 100; i = i+10) {
             listaValoriMorigeratoSpregiudicataFiglioSpregiudicata.add(i);
         }
-        ChoiceBox choiceBoxMorigeratoSpregiudicataFiglioSpregiudicata = new ChoiceBox(FXCollections.observableArrayList(listaValoriMorigeratoSpregiudicataFiglioSpregiudicata));
-        choiceBoxMorigeratoSpregiudicataFiglioSpregiudicata.setValue(0);
+
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -147,52 +172,23 @@ public class PersonalRandomStrategyPage {
 
 
         avanti.setOnAction(e -> {
-            if (
-                    (((int)choiceBoxAvventurieroSpregiudicataFiglioAvventuriero.getValue() +
-                    (int)choiceBoxAvventurieroSpregiudicataFiglioSpregiudicata.getValue() == 100)
-                    ||
-                    (int)choiceBoxAvventurieroSpregiudicataFiglioAvventuriero.getValue() +
-                    (int)choiceBoxAvventurieroSpregiudicataFiglioSpregiudicata.getValue() == 0)
-                    &&
-                    (((int)choiceBoxMorigeratoPrudenteFiglioMorigerato.getValue() +
-                    (int)choiceBoxMorigeratoPrudenteFiglioPrudente.getValue() == 100)
-                    ||
-                    (int)choiceBoxMorigeratoPrudenteFiglioMorigerato.getValue() +
-                    (int)choiceBoxMorigeratoPrudenteFiglioPrudente.getValue() == 0 )
-                    &&
-                    (((int)choiceBoxMorigeratoSpregiudicataFiglioMorigerato.getValue() +
-                    (int)choiceBoxMorigeratoSpregiudicataFiglioSpregiudicata.getValue() == 100)
-                    ||
-                    (int)choiceBoxMorigeratoSpregiudicataFiglioMorigerato.getValue() +
-                    (int)choiceBoxMorigeratoSpregiudicataFiglioSpregiudicata.getValue() == 0 )
-                    ) {
 
                 PersonalRandomStrategy personalRandomStrategy = new PersonalRandomStrategy();
                 personalRandomStrategy.setPercentAvventurieroSpregiudicata(
-                        (int)choiceBoxAvventurieroSpregiudicataFiglioAvventuriero.getValue(),
-                        (int)choiceBoxAvventurieroSpregiudicataFiglioSpregiudicata.getValue(),
-                        (int)choiceBoxMorigeratoPrudenteFiglioMorigerato.getValue(),
-                        (int)choiceBoxMorigeratoPrudenteFiglioPrudente.getValue(),
-                        (int)choiceBoxMorigeratoSpregiudicataFiglioMorigerato.getValue(),
-                        (int)choiceBoxMorigeratoSpregiudicataFiglioSpregiudicata.getValue()  );
+                        (int)sliderAs.getValue(),
+                        100 - (int)sliderAs.getValue(),
+                        (int)sliderMp.getValue(),
+                        100 - (int)sliderMp.getValue(),
+                        (int)sliderMs.getValue(),
+                        100 - (int)sliderMs.getValue()  );
 
 
-                GamePage gamePage=new GamePage(primaryStage);
+                GamePage gamePage = new GamePage(primaryStage);
                 try {
                     gamePage.startGamePage(personeIniziali, anniTotali, a, b, c, parallelo, personalRandomStrategy);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-
-            }
-            else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Dialog");
-                alert.setHeaderText(null);
-                alert.setContentText("La somma delle % di fare figli deve essere 100 \n" +
-                                    "Altrimenti 0 se non si vuole fare figli con la coppia.");
-                alert.showAndWait();
-            }
 
         });
 
@@ -204,47 +200,83 @@ public class PersonalRandomStrategyPage {
 
 
         HBox hAvventurieroSpregiudicata = new HBox(infoAvventurieroSpregiudicata);
-        hAvventurieroSpregiudicata.setAlignment(Pos.TOP_LEFT);
+        hAvventurieroSpregiudicata.setAlignment(Pos.TOP_CENTER);
         hAvventurieroSpregiudicata.setSpacing(30);
 
-        HBox hAvventurieroSpregiudicataFiglioAvventuriero = new HBox(infoAvventurieroSpregiudicataFiglioAvventuriero,choiceBoxAvventurieroSpregiudicataFiglioAvventuriero);
-        hAvventurieroSpregiudicataFiglioAvventuriero.setAlignment(Pos.TOP_LEFT);
-        hAvventurieroSpregiudicataFiglioAvventuriero.setSpacing(30);
+        HBox hAvventurieroSpregiudicataFiglioTop = new HBox(infoAvventurieroSpregiudicataFiglioAvventuriero, valueAsa);
+        hAvventurieroSpregiudicataFiglioTop.setAlignment(Pos.TOP_CENTER);
+        hAvventurieroSpregiudicataFiglioTop.setSpacing(30);
 
-        HBox hAvventurieroSpregiudicataFiglioSpregiudicata = new HBox(infoAvventurieroSpregiudicataFiglioSpregiudicata,choiceBoxAvventurieroSpregiudicataFiglioSpregiudicata);
-        hAvventurieroSpregiudicataFiglioSpregiudicata.setAlignment(Pos.TOP_LEFT);
-        hAvventurieroSpregiudicataFiglioSpregiudicata.setSpacing(30);
+        HBox hAvventurieroSpregiudicataFiglioMid = new HBox(sliderAs);
+        hAvventurieroSpregiudicataFiglioMid.setAlignment(Pos.TOP_CENTER);
+        hAvventurieroSpregiudicataFiglioMid.setSpacing(30);
+
+        HBox hAvventurieroSpregiudicataFiglioBot = new HBox(infoAvventurieroSpregiudicataFiglioSpregiudicata, valueAss);
+        hAvventurieroSpregiudicataFiglioBot.setAlignment(Pos.TOP_CENTER);
+        hAvventurieroSpregiudicataFiglioBot.setSpacing(30);
+
+
+        sliderAs.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                sliderAs.setValue(new_val.intValue());
+                valueAsa.textProperty().setValue(String.valueOf((int) sliderAs.getValue()));
+                valueAss.textProperty().setValue(String.valueOf(100 - (int) sliderAs.getValue()));
+            }
+        });
+
 
 
 
 
         HBox hMorigeratoPrudente = new HBox(infoMorigeratoPrudente);
-        hMorigeratoPrudente.setAlignment(Pos.TOP_LEFT);
+        hMorigeratoPrudente.setAlignment(Pos.TOP_CENTER);
         hMorigeratoPrudente.setSpacing(30);
 
-        HBox hMorigeratoPrudenteFiglioMorigerato = new HBox(infoMorigeratoPrudenteFiglioMorigerato,choiceBoxMorigeratoPrudenteFiglioMorigerato);
-        hMorigeratoPrudenteFiglioMorigerato.setAlignment(Pos.TOP_LEFT);
-        hMorigeratoPrudenteFiglioMorigerato.setSpacing(30);
+        HBox hMorigeratoPrudenteFiglioTop = new HBox(infoMorigeratoPrudenteFiglioMorigerato, valueMpm);
+        hMorigeratoPrudenteFiglioTop.setAlignment(Pos.TOP_CENTER);
+        hMorigeratoPrudenteFiglioTop.setSpacing(30);
 
-        HBox hMorigeratoPrudenteFiglioPrudente = new HBox(infoMorigeratoPrudenteFiglioPrudente,choiceBoxMorigeratoPrudenteFiglioPrudente);
-        hMorigeratoPrudenteFiglioPrudente.setAlignment(Pos.TOP_LEFT);
-        hMorigeratoPrudenteFiglioPrudente.setSpacing(30);
+        HBox hMorigeratoPrudenteFiglioMid = new HBox(sliderMp);
+        hMorigeratoPrudenteFiglioMid.setAlignment(Pos.TOP_CENTER);
+        hMorigeratoPrudenteFiglioMid.setSpacing(30);
+
+        HBox hMorigeratoPrudenteFiglioBot = new HBox(infoMorigeratoPrudenteFiglioPrudente, valueMpp);
+        hMorigeratoPrudenteFiglioBot.setAlignment(Pos.TOP_CENTER);
+        hMorigeratoPrudenteFiglioBot.setSpacing(30);
+
+        sliderMp.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                sliderMp.setValue(new_val.intValue());
+                valueMpm.textProperty().setValue(String.valueOf((int) sliderMp.getValue()));
+                valueMpp.textProperty().setValue(String.valueOf(100 - (int) sliderMp.getValue()));
+            }
+        });
 
 
 
         HBox hMorigeratoSpregiudicata = new HBox(infoMorigeratoSpregiudicata);
-        hMorigeratoSpregiudicata.setAlignment(Pos.TOP_LEFT);
+        hMorigeratoSpregiudicata.setAlignment(Pos.TOP_CENTER);
         hMorigeratoSpregiudicata.setSpacing(30);
 
-        HBox hMorigeratoSpregiudicataFiglioMorigerato = new HBox(infoMorigeratoSpregiudicataFiglioMorigerato,choiceBoxMorigeratoSpregiudicataFiglioMorigerato);
-        hMorigeratoSpregiudicataFiglioMorigerato.setAlignment(Pos.TOP_LEFT);
-        hMorigeratoSpregiudicataFiglioMorigerato.setSpacing(30);
+        HBox hMorigeratoSpregiudicataFiglioTop = new HBox(infoMorigeratoSpregiudicataFiglioMorigerato, valueMsm, sliderMs, valueMss, infoMorigeratoSpregiudicataFiglioSpregiudicata);
+        hMorigeratoSpregiudicataFiglioTop.setAlignment(Pos.TOP_CENTER);
+        hMorigeratoSpregiudicataFiglioTop.setSpacing(30);
 
-        HBox hMorigeratoSpregiudicataFiglioSpregiudicata = new HBox(infoMorigeratoSpregiudicataFiglioSpregiudicata,choiceBoxMorigeratoSpregiudicataFiglioSpregiudicata);
-        hMorigeratoSpregiudicataFiglioSpregiudicata.setAlignment(Pos.TOP_LEFT);
-        hMorigeratoSpregiudicataFiglioSpregiudicata.setSpacing(30);
+        HBox hMorigeratoSpregiudicataFiglioSlider = new HBox(sliderMs);
+        hMorigeratoSpregiudicataFiglioSlider.setAlignment(Pos.TOP_CENTER);
+        hMorigeratoSpregiudicataFiglioSlider.setSpacing(30);
 
+        HBox hMorigeratoSpregiudicataFiglioBot = new HBox(infoMorigeratoSpregiudicataFiglioSpregiudicata, valueMss);
+        hMorigeratoSpregiudicataFiglioBot.setAlignment(Pos.TOP_CENTER);
+        hMorigeratoSpregiudicataFiglioBot.setSpacing(30);
 
+        sliderMs.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                sliderMs.setValue(new_val.intValue());
+                valueMsm.textProperty().setValue(String.valueOf((int) sliderMs.getValue()));
+                valueMss.textProperty().setValue(String.valueOf(100 - (int) sliderMs.getValue()));
+            }
+        });
 
 
 
@@ -255,17 +287,20 @@ public class PersonalRandomStrategyPage {
 
         VBox vb = new VBox(hTitolo,
                 hAvventurieroSpregiudicata,
-                hAvventurieroSpregiudicataFiglioAvventuriero,
-                hAvventurieroSpregiudicataFiglioSpregiudicata,
+                hAvventurieroSpregiudicataFiglioTop,
+                hAvventurieroSpregiudicataFiglioMid,
+                hAvventurieroSpregiudicataFiglioBot,
                 hMorigeratoPrudente,
-                hMorigeratoPrudenteFiglioMorigerato,
-                hMorigeratoPrudenteFiglioPrudente,
+                hMorigeratoPrudenteFiglioTop,
+                hMorigeratoPrudenteFiglioMid,
+                hMorigeratoPrudenteFiglioBot,
                 hMorigeratoSpregiudicata,
-                hMorigeratoSpregiudicataFiglioMorigerato,
-                hMorigeratoSpregiudicataFiglioSpregiudicata,
+                hMorigeratoSpregiudicataFiglioTop,
+                hMorigeratoSpregiudicataFiglioSlider,
+                hMorigeratoSpregiudicataFiglioBot,
                 hAvanti);
         vb.setAlignment(Pos.TOP_CENTER);
-        vb.setSpacing(5);
+        //vb.setSpacing(0);
 
 
         vb.setStyle("-fx-background-image: url("+pathImmagineBackground+");" +
