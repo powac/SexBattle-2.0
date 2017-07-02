@@ -54,8 +54,8 @@ public class GamePage {
 
     private static Stage primaryStage;
 
-    private final int width = 1366;
-    private final int height = 768;
+    private final int width = 1176;
+    private final int height = 664;
 
     private static String pathImmagineBackground;
     private static Thread threadAggiornaPixel;
@@ -105,7 +105,7 @@ public class GamePage {
     private static int redWhite = 255;                                            // red component 0...255
     private static int greenWhite = 255;                                            // green component 0...255
     private static int blueWhite = 255;                                            // blue component 0...255
-    private static int alphaWhite = 10;                                          // alpha (transparency) component 0...255
+    private static int alphaWhite = 0;                                          // alpha (transparency) component 0...255
     private static int colorWhiteAreaBomb = (alphaWhite << 24) | (redWhite << 16) | (greenWhite << 8) | blueWhite;
 
 
@@ -324,7 +324,7 @@ public class GamePage {
         hTitolo.setAlignment(Pos.TOP_CENTER);
         hTitolo.setSpacing(30);
 
-        VBox vbButton = new VBox(chartBehaviour, atomicBomb);
+        VBox vbButton = new VBox(chartBehaviour, atomicBomb, startStop, terminaGioco);
         vbButton.setAlignment(Pos.TOP_CENTER);
         vbButton.setSpacing(40);
 
@@ -332,7 +332,7 @@ public class GamePage {
         hWorld.setAlignment(Pos.CENTER_LEFT);
         hWorld.setSpacing(30);
 
-        HBox hInfo = new HBox(startStop, anniTrascorsi, numeroMaschi, numeroFemmine, terminaGioco);
+        HBox hInfo = new HBox(anniTrascorsi, numeroMaschi, numeroFemmine);
         hInfo.setAlignment(Pos.TOP_LEFT);
         hInfo.setSpacing(30);
 
@@ -473,13 +473,18 @@ public class GamePage {
                         imView.setOnMouseMoved(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(javafx.scene.input.MouseEvent event) {
-
                                  if(eventoMovimento) {
                                     for(int xMatrice = 0 ; xMatrice < originalImage.getWidth(); xMatrice++) {
-                                        for(int yMatrice = 0 ; yMatrice < originalImage.getHeight(); yMatrice++) {
-                                            if(matriceBomba[xMatrice][yMatrice] != -1) {
-                                                drawAtomicArea(originalImage, imView, mm, yMatrice, xMatrice, colorWhiteAreaBomb);
-                                                matriceBomba[xMatrice][yMatrice] =- 1;
+                                        for (int yMatrice = 0; yMatrice < originalImage.getHeight(); yMatrice++) {
+                                            if (matriceBomba[xMatrice][yMatrice] != -1) {
+                                                //if (originalImage.getRGB(yMatrice, xMatrice) != colorBlueMorigerati &&
+                                                 //       originalImage.getRGB(yMatrice, xMatrice) != colorRedAvventurieri &&
+                                                    //    originalImage.getRGB(yMatrice, xMatrice) != colorGreenPrudenti &&
+                                                      //  originalImage.getRGB(yMatrice, xMatrice) != colorBrownSpregiudicate &&
+                                                   //     originalImage.getRGB(yMatrice, xMatrice) != 0) {
+                                                    drawAtomicArea(originalImage, imView, mm, yMatrice, xMatrice, colorWhiteAreaBomb);
+                                                    matriceBomba[xMatrice][yMatrice] = -1;
+                                                //}
                                             }
                                         }
                                     }
@@ -511,6 +516,7 @@ public class GamePage {
                                 for(int xMatrice = 0 ; xMatrice < originalImage.getWidth(); xMatrice++) {
                                     for(int yMatrice = 0 ; yMatrice < originalImage.getHeight(); yMatrice++) {
                                         if(matriceBomba[xMatrice][yMatrice] != -1) {
+                                            drawAtomicArea(originalImage, imView, wr, yMatrice, xMatrice, colorWhiteAreaBomb);
                                             bombaAtomicArea(originalImage, imView, wr, yMatrice, xMatrice, colorWhiteAreaBomb);
                                             matriceBomba[xMatrice][yMatrice] =- 1;
 
@@ -527,7 +533,7 @@ public class GamePage {
                                 eventoMovimento = false;
                                 eventoClick = false;
 
-                                atomicBomb.setDisable(true);
+                                atomicBomb.setDisable(false);
                             }
 
                         }
@@ -771,32 +777,29 @@ public class GamePage {
 
 
     private synchronized void drawAtomicArea(BufferedImage originalImage, ImageView imageView, WritableImage wr,
-                           int primoPixelRandom, int secondoPixelRandom, int color) {
+                                                  int primoPixelRandom, int secondoPixelRandom, int color) {
 
 
         //if(0 <= secondoPixelRandom && secondoPixelRandom < originalImage.getWidth() &&
-          //      0 <= primoPixelRandom && secondoPixelRandom < originalImage.getHeight()) {
+        //      0 <= primoPixelRandom && secondoPixelRandom < originalImage.getHeight()) {
 
-            if(originalImage.getRGB(secondoPixelRandom,primoPixelRandom) != colorBlueMorigerati &&
-                    originalImage.getRGB(secondoPixelRandom,primoPixelRandom) != colorRedAvventurieri &&
-                    originalImage.getRGB(secondoPixelRandom,primoPixelRandom) != colorGreenPrudenti &&
-                    originalImage.getRGB(secondoPixelRandom,primoPixelRandom) != colorBrownSpregiudicate &&
-                    originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != 0) {
-
-
-                originalImage.setRGB(secondoPixelRandom, primoPixelRandom, color);
-                wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, color);
-                imageView.setImage(wr);
-            }
+        if(originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != colorBlueMorigerati &&
+                originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != colorRedAvventurieri &&
+                originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != colorGreenPrudenti &&
+                originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != colorBrownSpregiudicate) {
+            // originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != 0) {
+            originalImage.setRGB(secondoPixelRandom, primoPixelRandom, 0);
+            wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, color);
+            imageView.setImage(wr);
         }
-
+    }
 
 
 
     private synchronized void bombaAtomicArea(BufferedImage originalImage, ImageView imageView, WritableImage wr,
                                 int primoPixelRandom, int secondoPixelRandom, int color) {
         if(originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != 0) {
-            originalImage.setRGB(secondoPixelRandom, primoPixelRandom,color);
+            originalImage.setRGB(secondoPixelRandom, primoPixelRandom, color);
             wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, color);
             imageView.setImage(wr);
         }
