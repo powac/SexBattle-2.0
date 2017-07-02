@@ -105,7 +105,7 @@ public class GamePage {
     private static int redWhite = 255;                                            // red component 0...255
     private static int greenWhite = 255;                                            // green component 0...255
     private static int blueWhite = 255;                                            // blue component 0...255
-    private static int alphaWhite = 100;                                          // alpha (transparency) component 0...255
+    private static int alphaWhite = 10;                                          // alpha (transparency) component 0...255
     private static int colorWhiteAreaBomb = (alphaWhite << 24) | (redWhite << 16) | (greenWhite << 8) | blueWhite;
 
 
