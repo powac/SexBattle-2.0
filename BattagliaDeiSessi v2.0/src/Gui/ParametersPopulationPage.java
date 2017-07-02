@@ -302,6 +302,8 @@ public class ParametersPopulationPage {
         primaryStage.setTitle(" La battaglia dei sessi ");
         primaryStage.setScene(scenaIniziale);
         primaryStage.setResizable(true);
+        primaryStage.setX(200);
+        primaryStage.setX(200);
         primaryStage.show();
 
     }

@@ -3,9 +3,12 @@ package Gui;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
@@ -17,8 +20,8 @@ public class OpeningPage {
 
     private static Stage primaryStage;
 
-    private final int width = 620;
-    private final int height = 540;
+    private final int width = 500;
+    private final int height = 400;
 
     private static String pathImmagineBackground;
 
@@ -59,6 +62,7 @@ public class OpeningPage {
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
 
+
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         ParametersPopulationPage ppp = new ParametersPopulationPage(primaryStage);
         delay.setOnFinished( e ->
@@ -69,8 +73,11 @@ public class OpeningPage {
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-        Scene scenaIniziale = new Scene(scrollPane, width, height);
+        final Scene scenaIniziale = new Scene(scrollPane, width, height);
 
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((screenBounds.getWidth() - width) / 2);
+        primaryStage.setY((screenBounds.getHeight() - height) / 2);
 
         primaryStage.setTitle(" SexBattle! ");
         primaryStage.setScene(scenaIniziale);

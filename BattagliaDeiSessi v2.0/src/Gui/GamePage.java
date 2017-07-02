@@ -372,7 +372,8 @@ public class GamePage {
 
         primaryStage.setTitle(" La battaglia dei sessi ");
         primaryStage.setScene(scenaIniziale);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
 
 
@@ -477,14 +478,8 @@ public class GamePage {
                                     for(int xMatrice = 0 ; xMatrice < originalImage.getWidth(); xMatrice++) {
                                         for (int yMatrice = 0; yMatrice < originalImage.getHeight(); yMatrice++) {
                                             if (matriceBomba[xMatrice][yMatrice] != -1) {
-                                                //if (originalImage.getRGB(yMatrice, xMatrice) != colorBlueMorigerati &&
-                                                 //       originalImage.getRGB(yMatrice, xMatrice) != colorRedAvventurieri &&
-                                                    //    originalImage.getRGB(yMatrice, xMatrice) != colorGreenPrudenti &&
-                                                      //  originalImage.getRGB(yMatrice, xMatrice) != colorBrownSpregiudicate &&
-                                                   //     originalImage.getRGB(yMatrice, xMatrice) != 0) {
                                                     drawAtomicArea(originalImage, imView, mm, yMatrice, xMatrice, colorWhiteAreaBomb);
                                                     matriceBomba[xMatrice][yMatrice] = -1;
-                                                //}
                                             }
                                         }
                                     }
@@ -702,10 +697,10 @@ public class GamePage {
 
         SexualityAnalyzer sexualityAnalyzer = new SexualityAnalyzer(popolazioneUniverso);
         double percentualiMaschioDouble = sexualityAnalyzer.sexualityCounterX100().get(PeopleFactory.Sexuality.Maschio);
-        float percentualiMaschioFloat = (float) percentualiMaschioDouble;
+        String percentualiMaschioFloat = String.format("%.2f", percentualiMaschioDouble);
 
         double percentualiFemminaDouble = sexualityAnalyzer.sexualityCounterX100().get(PeopleFactory.Sexuality.Femmina);
-        float percentualiFemminaFloat = (float) percentualiFemminaDouble;
+        String percentualiFemminaFloat = String.format("%.2f", percentualiFemminaDouble);
 
         numeroMaschi.setText("Maschi: " + sexualityAnalyzer.sexualityCounter().get(PeopleFactory.Sexuality.Maschio) + " ( " +
                 percentualiMaschioFloat + " % del totale)");
@@ -779,16 +774,10 @@ public class GamePage {
     private synchronized void drawAtomicArea(BufferedImage originalImage, ImageView imageView, WritableImage wr,
                                                   int primoPixelRandom, int secondoPixelRandom, int color) {
 
-
-        //if(0 <= secondoPixelRandom && secondoPixelRandom < originalImage.getWidth() &&
-        //      0 <= primoPixelRandom && secondoPixelRandom < originalImage.getHeight()) {
-
         if(originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != colorBlueMorigerati &&
                 originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != colorRedAvventurieri &&
                 originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != colorGreenPrudenti &&
                 originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != colorBrownSpregiudicate) {
-            // originalImage.getRGB(secondoPixelRandom, primoPixelRandom) != 0) {
-            originalImage.setRGB(secondoPixelRandom, primoPixelRandom, 0);
             wr.getPixelWriter().setArgb(secondoPixelRandom, primoPixelRandom, color);
             imageView.setImage(wr);
         }
