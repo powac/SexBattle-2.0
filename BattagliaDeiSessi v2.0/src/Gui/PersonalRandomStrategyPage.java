@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -17,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -26,10 +28,10 @@ import java.util.ArrayList;
 public class PersonalRandomStrategyPage {
 
 
-    private static Stage primaryStage;
+    private static Stage primaryStage = new Stage();
 
-    private final int width = 640;
-    private final int height = 500;
+    private final int width = 800;
+    private final int height = 600;
 
     private static String pathImmagineBackground;
 
@@ -79,8 +81,9 @@ public class PersonalRandomStrategyPage {
         sliderAs.setBlockIncrement(1);
 
         final Label valueAsa = new Label(Integer.toString((int)sliderAs.getValue()));
+        valueAsa.setStyle("-fx-font: 16 Symbol");
         final Label valueAss = new Label(Integer.toString(100 - (int)sliderAs.getValue()));
-
+        valueAss.setStyle("-fx-font: 16 Symbol");
 
         Text infoAvventurieroSpregiudicataFiglioSpregiudicata = new Text("Probabilità che la figlia sia Spregiudicata in %: \n");
         infoAvventurieroSpregiudicataFiglioSpregiudicata.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
@@ -114,7 +117,9 @@ public class PersonalRandomStrategyPage {
         sliderMp.setBlockIncrement(1);
 
         final Label valueMpm = new Label(Integer.toString((int)sliderMp.getValue()));
+        valueMpm.setStyle("-fx-font: 16 Symbol");
         final Label valueMpp = new Label(Integer.toString(100 - (int)sliderMp.getValue()));
+        valueMpp.setStyle("-fx-font: 16 Symbol");
 
 
 
@@ -149,8 +154,9 @@ public class PersonalRandomStrategyPage {
         sliderMs.setBlockIncrement(1);
 
         final Label valueMsm = new Label(Integer.toString((int)sliderMs.getValue()));
+        valueMsm.setStyle("-fx-font: 16 Symbol");
         final Label valueMss = new Label(Integer.toString(100 - (int)sliderMs.getValue()));
-
+        valueMss.setStyle("-fx-font: 16 Symbol");
 
 
         Text infoMorigeratoSpregiudicataFiglioSpregiudicata = new Text("Probabilità che la figlia sia Spregiudicata in %: \n");
@@ -196,24 +202,25 @@ public class PersonalRandomStrategyPage {
 
         HBox hTitolo = new HBox(titolo);
         hTitolo.setAlignment(Pos.TOP_CENTER);
-        hTitolo.setSpacing(30);
+        hTitolo.setSpacing(0);
 
 
         HBox hAvventurieroSpregiudicata = new HBox(infoAvventurieroSpregiudicata);
         hAvventurieroSpregiudicata.setAlignment(Pos.TOP_CENTER);
-        hAvventurieroSpregiudicata.setSpacing(30);
+        hAvventurieroSpregiudicata.setSpacing(0);
 
         HBox hAvventurieroSpregiudicataFiglioTop = new HBox(infoAvventurieroSpregiudicataFiglioAvventuriero, valueAsa);
         hAvventurieroSpregiudicataFiglioTop.setAlignment(Pos.TOP_CENTER);
-        hAvventurieroSpregiudicataFiglioTop.setSpacing(30);
+        hAvventurieroSpregiudicataFiglioTop.setSpacing(0);
 
-        HBox hAvventurieroSpregiudicataFiglioMid = new HBox(sliderAs);
+        HBox hAvventurieroSpregiudicataFiglioMid = new HBox(infoAvventurieroSpregiudicataFiglioSpregiudicata, valueAss);
         hAvventurieroSpregiudicataFiglioMid.setAlignment(Pos.TOP_CENTER);
-        hAvventurieroSpregiudicataFiglioMid.setSpacing(30);
+        hAvventurieroSpregiudicataFiglioMid.setSpacing(0);
 
-        HBox hAvventurieroSpregiudicataFiglioBot = new HBox(infoAvventurieroSpregiudicataFiglioSpregiudicata, valueAss);
+        HBox hAvventurieroSpregiudicataFiglioBot = new HBox(sliderAs);
         hAvventurieroSpregiudicataFiglioBot.setAlignment(Pos.TOP_CENTER);
-        hAvventurieroSpregiudicataFiglioBot.setSpacing(30);
+        hAvventurieroSpregiudicataFiglioBot.setSpacing(0);
+
 
 
         sliderAs.valueProperty().addListener(new ChangeListener<Number>() {
@@ -226,23 +233,23 @@ public class PersonalRandomStrategyPage {
 
 
 
-
-
         HBox hMorigeratoPrudente = new HBox(infoMorigeratoPrudente);
         hMorigeratoPrudente.setAlignment(Pos.TOP_CENTER);
-        hMorigeratoPrudente.setSpacing(30);
+        hMorigeratoPrudente.setSpacing(0);
 
         HBox hMorigeratoPrudenteFiglioTop = new HBox(infoMorigeratoPrudenteFiglioMorigerato, valueMpm);
         hMorigeratoPrudenteFiglioTop.setAlignment(Pos.TOP_CENTER);
-        hMorigeratoPrudenteFiglioTop.setSpacing(30);
+        hMorigeratoPrudenteFiglioTop.setSpacing(0);
 
-        HBox hMorigeratoPrudenteFiglioMid = new HBox(sliderMp);
+        HBox hMorigeratoPrudenteFiglioMid = new HBox(infoMorigeratoPrudenteFiglioPrudente, valueMpp);
         hMorigeratoPrudenteFiglioMid.setAlignment(Pos.TOP_CENTER);
-        hMorigeratoPrudenteFiglioMid.setSpacing(30);
+        hMorigeratoPrudenteFiglioMid.setSpacing(0);
 
-        HBox hMorigeratoPrudenteFiglioBot = new HBox(infoMorigeratoPrudenteFiglioPrudente, valueMpp);
+        HBox hMorigeratoPrudenteFiglioBot = new HBox(sliderMp);
         hMorigeratoPrudenteFiglioBot.setAlignment(Pos.TOP_CENTER);
-        hMorigeratoPrudenteFiglioBot.setSpacing(30);
+        hMorigeratoPrudenteFiglioBot.setSpacing(0);
+
+
 
         sliderMp.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
@@ -256,19 +263,21 @@ public class PersonalRandomStrategyPage {
 
         HBox hMorigeratoSpregiudicata = new HBox(infoMorigeratoSpregiudicata);
         hMorigeratoSpregiudicata.setAlignment(Pos.TOP_CENTER);
-        hMorigeratoSpregiudicata.setSpacing(30);
+        hMorigeratoSpregiudicata.setSpacing(0);
 
         HBox hMorigeratoSpregiudicataFiglioTop = new HBox(infoMorigeratoSpregiudicataFiglioMorigerato, valueMsm, sliderMs, valueMss, infoMorigeratoSpregiudicataFiglioSpregiudicata);
         hMorigeratoSpregiudicataFiglioTop.setAlignment(Pos.TOP_CENTER);
-        hMorigeratoSpregiudicataFiglioTop.setSpacing(30);
+        hMorigeratoSpregiudicataFiglioTop.setSpacing(0);
 
-        HBox hMorigeratoSpregiudicataFiglioSlider = new HBox(sliderMs);
-        hMorigeratoSpregiudicataFiglioSlider.setAlignment(Pos.TOP_CENTER);
-        hMorigeratoSpregiudicataFiglioSlider.setSpacing(30);
+        HBox hMorigeratoSpregiudicataFiglioMid = new HBox(infoMorigeratoSpregiudicataFiglioSpregiudicata, valueMss);
+        hMorigeratoSpregiudicataFiglioMid.setAlignment(Pos.TOP_CENTER);
+        hMorigeratoSpregiudicataFiglioMid.setSpacing(0);
 
-        HBox hMorigeratoSpregiudicataFiglioBot = new HBox(infoMorigeratoSpregiudicataFiglioSpregiudicata, valueMss);
+        HBox hMorigeratoSpregiudicataFiglioBot = new HBox(sliderMs);
         hMorigeratoSpregiudicataFiglioBot.setAlignment(Pos.TOP_CENTER);
-        hMorigeratoSpregiudicataFiglioBot.setSpacing(30);
+        hMorigeratoSpregiudicataFiglioBot.setSpacing(0);
+
+
 
         sliderMs.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
@@ -296,7 +305,7 @@ public class PersonalRandomStrategyPage {
                 hMorigeratoPrudenteFiglioBot,
                 hMorigeratoSpregiudicata,
                 hMorigeratoSpregiudicataFiglioTop,
-                hMorigeratoSpregiudicataFiglioSlider,
+                hMorigeratoSpregiudicataFiglioMid,
                 hMorigeratoSpregiudicataFiglioBot,
                 hAvanti);
         vb.setAlignment(Pos.TOP_CENTER);
@@ -322,12 +331,20 @@ public class PersonalRandomStrategyPage {
         Scene scenaIniziale = new Scene(scrollPane, width, height );
         scenaIniziale.setFill(Color.AQUA);            // Colore di background della scena
         primaryStage.setScene(scenaIniziale);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((screenBounds.getWidth() - width) / 2);
+        primaryStage.setY((screenBounds.getHeight() - height) / 2);
+        primaryStage.sizeToScene();
 
         primaryStage.setTitle(" La battaglia dei sessi ");
         primaryStage.setScene(scenaIniziale);
         primaryStage.setResizable(true);
         primaryStage.show();
     }
+
+
+
+
 
     private synchronized void SfondoBottone(Button bottone)
     {

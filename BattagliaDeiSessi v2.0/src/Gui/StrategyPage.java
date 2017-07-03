@@ -2,12 +2,14 @@ package Gui;
 
 import Populations.Strategy.MeetingStrategyFactory;
 import Populations.Strategy.StrategyFactories;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -31,7 +34,7 @@ import java.io.IOException;
 public class StrategyPage {
 
 
-    private static Stage primaryStage;
+    public static Stage primaryStage;
 
     private static MeetingStrategyFactory gameFactoryStrategiaSelezionata = null;
 
@@ -61,6 +64,8 @@ public class StrategyPage {
             }
         });
 
+
+        pathImmagineBackground = getClass().getResource("Hearth.jpg").toString();
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -207,7 +212,9 @@ public class StrategyPage {
 
 
         vb.setStyle("-fx-background-image: url("+pathImmagineBackground+");" +
-                "-fx-background-repeat: repeat;");
+                "-fx-background-repeat: no-repeat;" +
+                "-fx-background-image-opacity: 0.1;" +
+                "-fx-background-size: stretch;");
 
 
 
@@ -217,7 +224,6 @@ public class StrategyPage {
         ScrollPane scrollPane = new ScrollPane(vb);
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
-
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -229,6 +235,10 @@ public class StrategyPage {
         primaryStage.setTitle(" La battaglia dei sessi ");
         primaryStage.setScene(scenaIniziale);
         primaryStage.setResizable(true);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((screenBounds.getWidth() - width) / 2);
+        primaryStage.setY((screenBounds.getHeight() - height) / 2);
+
         primaryStage.show();
     }
 
@@ -314,7 +324,7 @@ public class StrategyPage {
         private StringProperty firstName;
 
         public riga(String firstName) {
-            this.firstName=new SimpleStringProperty(firstName);
+            this.firstName = new SimpleStringProperty(firstName);
         }
         public synchronized void setFirstName(String value) { firstName.set(value); }
         public synchronized String getFirstName() { return firstName.get(); }

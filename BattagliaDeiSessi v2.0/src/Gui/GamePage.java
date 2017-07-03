@@ -10,6 +10,7 @@ import Populations.Population;
 import Populations.Strategy.MeetingStrategyFactory;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -25,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -52,7 +54,7 @@ public class GamePage {
 
     private static MeetingStrategyFactory strategiaSelezionata;
 
-    private static Stage primaryStage;
+    private static Stage primaryStage = new Stage();
 
     private final int width = 1176;
     private final int height = 664;
@@ -369,13 +371,14 @@ public class GamePage {
 
         Scene scenaIniziale = new Scene(scrollPane, width, height );
 
-
         primaryStage.setTitle(" La battaglia dei sessi ");
         primaryStage.setScene(scenaIniziale);
         primaryStage.setResizable(true);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((screenBounds.getWidth() - width) / 2);
+        primaryStage.setY((screenBounds.getHeight() - height) / 2);
         primaryStage.setFullScreen(true);
         primaryStage.show();
-
 
     }
 

@@ -1,16 +1,16 @@
 package Test;
 
 import Gui.OpeningPage;
-import Humans.People;
-import Humans.PeopleFactory;
-import Populations.Analyzer.*;
-import Populations.Population;
-import Populations.Strategy.OverXvalueStrategy;
+import Gui.ParametersPopulationPage;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import java.util.*;
+import javafx.util.Duration;
+
 import java.util.concurrent.ExecutionException;
 
 
@@ -22,6 +22,7 @@ public class FXmain extends Application {
         launch(args);
     }
 
+
     @Override
     public synchronized void start(Stage primaryStage) throws ExecutionException, InterruptedException {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -32,10 +33,23 @@ public class FXmain extends Application {
             }
         });
 
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        PauseTransition delay2 = new PauseTransition(Duration.seconds(2.5));
         OpeningPage openingPage = new OpeningPage(primaryStage);
+        ParametersPopulationPage ppp = new ParametersPopulationPage(ParametersPopulationPage.primaryStage);
+        Platform.setImplicitExit(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         openingPage.startOpeningPage();
+        delay.play();
+        delay2.play();
+        delay.setOnFinished(event ->
+                primaryStage.close());
+        delay2.setOnFinished(event ->
+                ppp.startParametersPopulationPage());
     }
 }
+
+
 
 
 

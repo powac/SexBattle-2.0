@@ -1,27 +1,24 @@
 package Gui;
 
-import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.util.Duration;
 
 import java.lang.Thread;
 
 public class OpeningPage {
 
 
-    private static Stage primaryStage;
+    public static Stage pStage;
 
-    private final int width = 500;
-    private final int height = 400;
+    private final int width = 600;
+    private final int height = 315;
 
     private static String pathImmagineBackground;
 
@@ -29,20 +26,24 @@ public class OpeningPage {
 
 
     public OpeningPage(Stage primaryStage) {
-        OpeningPage.primaryStage = primaryStage;
+        OpeningPage.pStage = primaryStage;
     }
 
+
+
+
+
     public synchronized void startOpeningPage() {
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        pStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public synchronized void handle(WindowEvent event) {                        // gestisco l'uscita inaspettata dalla GUI
-                primaryStage.close();
+                pStage.close();
                 Thread.currentThread().interrupt();
             }
         });
 
 
-        pathImmagineBackground = getClass().getResource("FotoIniziale.jpeg").toString();
+        pathImmagineBackground = getClass().getResource("redblue.jpg").toString();
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -52,7 +53,7 @@ public class OpeningPage {
         vb.setSpacing(50);
 
         vb.setStyle("-fx-background-image: url("+ pathImmagineBackground +");" +
-                "-fx-background-repeat: repeat;");
+                "-fx-background-repeat: no-repeat;");
 
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -63,12 +64,6 @@ public class OpeningPage {
         scrollPane.setFitToWidth(true);
 
 
-        PauseTransition delay = new PauseTransition(Duration.seconds(2));
-        ParametersPopulationPage ppp = new ParametersPopulationPage(primaryStage);
-        delay.setOnFinished( e ->
-                ppp.startParametersPopulationPage());
-        delay.play();
-
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -76,12 +71,12 @@ public class OpeningPage {
         final Scene scenaIniziale = new Scene(scrollPane, width, height);
 
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        primaryStage.setX((screenBounds.getWidth() - width) / 2);
-        primaryStage.setY((screenBounds.getHeight() - height) / 2);
+        pStage.setX((screenBounds.getWidth() - width) / 2);
+        pStage.setY((screenBounds.getHeight() - height) / 2);
 
-        primaryStage.setTitle(" SexBattle! ");
-        primaryStage.setScene(scenaIniziale);
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        pStage.setTitle(" SexBattle! ");
+        pStage.setScene(scenaIniziale);
+        pStage.setResizable(false);
+        pStage.show();
     }
 }

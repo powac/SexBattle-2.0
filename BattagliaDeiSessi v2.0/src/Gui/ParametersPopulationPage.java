@@ -1,9 +1,11 @@
 package Gui;
 
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -15,7 +17,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
@@ -26,7 +30,7 @@ public class ParametersPopulationPage {
 
 
 
-    private static Stage primaryStage;
+    public static Stage primaryStage = new Stage();
 
     private static final int width = 800;
     private static final int height = 600;
@@ -43,7 +47,7 @@ public class ParametersPopulationPage {
 
 
 
-    public static synchronized void startParametersPopulationPage() {
+    public synchronized void startParametersPopulationPage() {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public synchronized void handle(WindowEvent event) {                         // gestisco l'uscita inaspettata dalla GUI
@@ -52,7 +56,7 @@ public class ParametersPopulationPage {
             }
         });
 
-
+        pathImmagineBackground = getClass().getResource("interface.png").toString();
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -61,7 +65,7 @@ public class ParametersPopulationPage {
         Text titolo = new Text("Benvenuto");
         titolo.setFont(Font.font("Papyrus", FontPosture.ITALIC, 65));
         HBox.setHgrow(titolo, Priority.ALWAYS);// Si estende in orizzontale
-        titolo.setFill(Color.BLACK);
+        titolo.setFill(Color.WHITE);
 
 
 
@@ -72,6 +76,7 @@ public class ParametersPopulationPage {
         Text personeInizialiInfo = new Text(
                 "      Numero di persone della generazione 0\n");
         personeInizialiInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
+        personeInizialiInfo.setFill(Color.WHITE);
 
         Slider sliderP = new Slider(0, 10000, 1000); // Per la dimensione della fonte
         sliderP.setShowTickLabels(true);
@@ -90,6 +95,7 @@ public class ParametersPopulationPage {
         Text anniTotaliInfo = new Text(
                 "       Anni per il quale verrà simulata l'evoluzione \n");
         anniTotaliInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
+        anniTotaliInfo.setFill(Color.WHITE);
 
         Slider sliderA = new Slider(0, 1000, 150); // Per la dimensione della fonte
         sliderA.setShowTickLabels(true);
@@ -106,6 +112,7 @@ public class ParametersPopulationPage {
 
         Text aInfo = new Text("    Inserisci   A : premio per la generazione di figli \n");
         aInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
+        aInfo.setFill(Color.WHITE);
 
         Slider slidera = new Slider(0, 100, 15); // Per la dimensione della fonte
         slidera.setShowTickLabels(true);
@@ -122,6 +129,7 @@ public class ParametersPopulationPage {
 
         Text bInfo = new Text("     Inserisci   B : costo del crescere figli \n");
         bInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
+        bInfo.setFill(Color.WHITE);
 
         Slider sliderb = new Slider(0, 100, 20); // Per la dimensione della fonte
         sliderb.setShowTickLabels(true);
@@ -132,12 +140,14 @@ public class ParametersPopulationPage {
 
         final Label valueb = new Label(Integer.toString((int)sliderb.getValue()));
 
+
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 
         Text cInfo = new Text("     Inserisci   C : costo del corteggiamento \n");
         cInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
+        cInfo.setFill(Color.WHITE);
 
         Slider sliderc = new Slider(0, 100, 3); // Per la dimensione della fonte
         sliderc.setShowTickLabels(true);
@@ -154,6 +164,8 @@ public class ParametersPopulationPage {
 
         Text sequenzialeParalleloInfo = new Text("    Scegli se vuoi accoppiamenti singoli o multipli \n");
         sequenzialeParalleloInfo.setFont(Font.font("Arial",FontPosture.ITALIC, 20));
+        sequenzialeParalleloInfo.setFill(Color.WHITE);
+
 
         ArrayList<String> listaValoriSequenzialeParalleloInfo = new ArrayList<>();
         listaValoriSequenzialeParalleloInfo.add("Singoli");
@@ -192,6 +204,9 @@ public class ParametersPopulationPage {
         });
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
 
         HBox hTitolo = new HBox(titolo);
         hTitolo.setAlignment(Pos.TOP_CENTER);
@@ -280,7 +295,9 @@ public class ParametersPopulationPage {
         vb.setSpacing(0);
 
 
-        vb.setStyle("-fx-background-image: url(" + pathImmagineBackground + ");" + "-fx-background-repeat: repeat;");
+        vb.setStyle("-fx-background-image: url(" + pathImmagineBackground + ");"
+                + "-fx-background-repeat: no-repeat;"
+                + "-fx-background-size: auto;");
 
 
 
@@ -290,7 +307,6 @@ public class ParametersPopulationPage {
         ScrollPane scrollPane = new ScrollPane(vb);
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
-
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -302,12 +318,16 @@ public class ParametersPopulationPage {
         primaryStage.setTitle(" La battaglia dei sessi ");
         primaryStage.setScene(scenaIniziale);
         primaryStage.setResizable(true);
-        primaryStage.setX(200);
-        primaryStage.setX(200);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((screenBounds.getWidth() - width) / 2);
+        primaryStage.setY((screenBounds.getHeight() - height) / 2);
+
+
+        primaryStage.initStyle(StageStyle.DECORATED);
+        primaryStage.setOnHidden(event -> Platform.exit());
         primaryStage.show();
-
+        //Platform.setImplicitExit(true);
     }
-
 
 
 
